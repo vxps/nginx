@@ -8,7 +8,7 @@
     src: nginx.conf.j2
     dest: "{{ nginx_conf_path }}"
   notify:
-    - reload nginx
+    - restart nginx
 
 - name: Ensure Nginx is running
   service:
