@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name {{ server_name | default('localhost') }};
+
+    location /static/ {
+        alias {{ static_root }};
+    }
+
+    location / {
+        proxy_pass http://{{ django_app_host }}:{{ django_port }};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
